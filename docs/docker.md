@@ -1,6 +1,6 @@
 ---
 title: Dockerisation
-icon: lucide/container
+icon: lucide/server
 ---
 
 # Dockerisation

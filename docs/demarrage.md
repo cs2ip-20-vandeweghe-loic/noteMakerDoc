@@ -32,9 +32,7 @@ Avant d'installer NoteMaker, assurez-vous d'avoir les éléments suivants :
 
 ### Avec Docker
 
-`echo 'alias note="docker compose -f docker/compose.yaml run --rm note-maker"' >> ~/.bashrc && source ~/.bashrc`
-
-Pour une configuration complète (Bash/Zsh/détails), voir [Dockerisation](docker.md).
+Consultez l'onglet [Dockerisation](docker.md).
 
 ---
 

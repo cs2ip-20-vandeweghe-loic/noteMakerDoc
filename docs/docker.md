@@ -51,26 +51,37 @@ Docker permet d'**exécuter NoteMaker depuis votre poste de travail** sans insta
 
 ---
 
-## Utilisation avec Docker Compose
+## Configuration du script bash
 
-Le projet inclut un fichier **`docker/compose.yaml`** prêt à l'emploi.
+Pour utiliser NoteMaker simplement avec la commande `note`, créez un script bash.
 
-### Configuration de l'alias
+### Étape 1 - Créer le script
 
-Pour simplifier l'utilisation, créez un **alias** dans votre shell.
-
-**Bash** - Ajoutez dans `~/.bashrc` :
+Créez un fichier `note` contenant :
 
 ```bash
-echo 'alias note="docker compose -f docker/compose.yaml run --rm note-maker"' >> ~/.bashrc
-source ~/.bashrc
+#!/bin/sh
+
+mkdir -p "$HOME/.note-maker"
+
+docker run --rm \
+    -v "$HOME/.note-maker:/data" \
+    -e NOTES_DB=/data/.notes.json \
+    -e NOTES_EXPORT_DIR=/data/notes \
+    note-maker "$@"
 ```
 
-**Zsh** - Ajoutez dans `~/.zshrc` :
+### Étape 2 - Rendre le script exécutable
 
-```bash
-echo 'alias note="docker compose -f docker/compose.yaml run --rm note-maker"' >> ~/.zshrc
-source ~/.zshrc
+```
+chmod +x note
+```
+
+### Étape 3 - Installer le script
+
+```
+mkdir -p ~/.local/bin
+mv note ~/.local/bin/
 ```
 
 ---
@@ -105,11 +116,11 @@ Toutes : `note delete all`
 
 ## Où sont stockées vos notes ?
 
-Les données sont automatiquement sauvegardées dans le dossier **`notes-data/`** à la racine du projet :
+Les données sont automatiquement sauvegardées dans **`~/.note-maker/`** :
 
-- **Base de données** : `notes-data/.notes.json`
+- **Base de données** : `~/.note-maker/.notes.json`
 
-- **Exports Markdown** : `notes-data/notes/`
+- **Exports Markdown** : `~/.note-maker/notes/`
 
 Vos notes persistent entre chaque utilisation grâce au volume Docker.
 
@@ -117,15 +128,14 @@ Vos notes persistent entre chaque utilisation grâce au volume Docker.
 
 ## Variables d'environnement
 
-Le fichier `docker/compose.yaml` définit automatiquement :
+Le script bash définit automatiquement :
 
 | Variable | Valeur | Description |
 |----------|--------|-------------|
 | `NOTES_DB` | `/data/.notes.json` | Fichier de base de données |
 | `NOTES_EXPORT_DIR` | `/data/notes` | Dossier d'export Markdown |
-| `PYTHONUNBUFFERED` | `1` | Logs en temps réel |
 
-Vous pouvez les modifier dans le fichier `docker/compose.yaml` si nécessaire.
+Vous pouvez les modifier dans le script `~/.local/bin/note` si nécessaire.
 
 ---
 
@@ -133,13 +143,7 @@ Vous pouvez les modifier dans le fichier `docker/compose.yaml` si nécessaire.
 
 ### Configuration initiale (une fois)
 
-**Étape 1 & 2** - Créer et activer l'alias
-
-Voir la section [Configuration de l'alias](#configuration-de-lalias) ci-dessus.
-
-**Étape 3** - Construire l'image
-
-`docker compose -f docker/compose.yaml build`
+Voir la section [Configuration du script bash](#configuration-du-script-bash) ci-dessus.
 
 ### Utilisation quotidienne
 
@@ -163,40 +167,38 @@ Pour tester que tout fonctionne :
 
 **3. Consulter le fichier de données**
 
-`cat notes-data/.notes.json`
+`cat ~/.note-maker/.notes.json`
 
 Si vous voyez votre note en JSON, tout est opérationnel.
 
 ---
 
-!!! info "Astuce : vérifier l'alias"
-    Tapez : `type note`
+!!! info "Astuce : vérifier le script"
+    Tapez : `which note`
     
     Résultat attendu :
     ```
-    note is aliased to 'docker compose -f docker/compose.yaml run --rm note-maker'
+    /home/<user>/.local/bin/note
     ```
 
 ---
 
 ## Commandes utiles
 
-### Construction et nettoyage
+**Mettre à jour l'image**
 
-**Construire l'image manuellement**
+`docker pull ghcr.io/cs2ip-20-vandeweghe-loic/note-maker:main`
 
-`docker compose -f docker/compose.yaml build`
+**Supprimer l'image locale**
 
-**Supprimer le conteneur**
+`docker rmi note-maker`
 
-`docker compose -f docker/compose.yaml down`
+**Supprimer toutes les données**
 
-**Nettoyer tout**
-
-`docker compose -f docker/compose.yaml down --volumes`
+`rm -rf ~/.note-maker`
 
 !!! warning "Attention"
-    La dernière commande **supprime vos notes** : utilisez cette commande avec précaution.
+    La dernière commande **supprime définitivement toutes vos notes** : utilisez-la avec précaution.
 
 ---
 

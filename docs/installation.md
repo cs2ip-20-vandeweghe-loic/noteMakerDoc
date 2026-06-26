@@ -85,7 +85,7 @@ Ce fichier JSON est créé lors de l'ajout de votre première note.
 
 ---
 
-## Alternative : Installation Docker
+## Alternative : 
 
 Si vous préférez utiliser Docker, consultez l'onglet [Dockerisation](docker.md) pour une installation sans Python.
 

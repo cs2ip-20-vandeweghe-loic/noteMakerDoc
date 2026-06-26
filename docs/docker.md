@@ -28,6 +28,27 @@ Docker permet d'**exécuter NoteMaker depuis votre poste de travail** sans insta
 
 **Vérification** : `docker --version`
 
+!!! note "Installation dockerisée"
+
+    Vous pouvez télécharger le container via la commande ci-dessous :
+
+    ```
+    docker pull ghcr.io/cs2ip-20-vandeweghe-loic/note-maker:main
+
+    docker run note-maker
+    ```
+
+    Si vous préférez télécharger manuellement le dépot, veuillez suivre les étapes suivantes :
+
+    ```
+    1. git pull https://github.com/cs2ip-20-vandeweghe-loic/noteMakerPy/tree/main
+
+    2. cd ./docker
+
+    3. sudo docker compose up -d
+    ```
+
+
 ---
 
 ## Utilisation avec Docker Compose
@@ -112,19 +133,9 @@ Vous pouvez les modifier dans le fichier `docker/compose.yaml` si nécessaire.
 
 ### Configuration initiale (une fois)
 
-**Étape 1** - Créer l'alias
+**Étape 1 & 2** - Créer et activer l'alias
 
-Pour Bash : 
-
-`echo 'alias note="docker compose -f docker/compose.yaml run --rm note-maker"' >> ~/.bashrc`
-
-Pour Zsh : 
-
-`echo 'alias note="docker compose -f docker/compose.yaml run --rm note-maker"' >> ~/.zshrc`
-
-**Étape 2** - Activer l'alias
-
-`source ~/.bashrc` ou `source ~/.zshrc`
+Voir la section [Configuration de l'alias](#configuration-de-lalias) ci-dessus.
 
 **Étape 3** - Construire l'image
 
@@ -132,12 +143,7 @@ Pour Zsh :
 
 ### Utilisation quotidienne
 
-Ensuite, utilisez simplement :
-
-- `note add "Ma tâche"`
-- `note list`
-- `note delete 1`
-- `note export markdown`
+Voir la section [Commandes disponibles](#commandes-disponibles) ci-dessus.
 
 **Aucune différence avec une installation classique.**
 

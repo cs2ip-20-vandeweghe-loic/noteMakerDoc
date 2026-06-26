@@ -9,7 +9,6 @@
   color: var(--md-primary-bg-color);
 }
 
-/* Search bar - texte et icône en blanc (modes clair et sombre) */
 .md-header .md-search__button {
   color: #fff;
   background-color: rgba(255, 255, 255, 0.15);
@@ -30,7 +29,6 @@
   color: #fff;
 }
 
-/* Réordonner header : logo+titre à gauche, search centrée, palette à droite */
 .md-header__inner {
   position: relative;
 }

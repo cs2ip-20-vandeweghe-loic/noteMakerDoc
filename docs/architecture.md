@@ -64,7 +64,7 @@ noteMakerPy/
 | **function/delete.py** | Suppression de note(s) |
 | **function/export_markdown.py** | Export vers fichiers Markdown |
 
-Flux simplifié : `Utilisateur` → `cli.py` → `function/*.py` → `database.py` → fichier JSON
+Flux simplifié : `Utilisateur` > `cli.py` > `function/*.py` > `database.py` > fichier JSON
 
 ---
 

@@ -9,6 +9,21 @@ icon: lucide/zap
 
 ---
 
+## Prérequis
+
+Avant d'installer NoteMaker, assurez-vous d'avoir les éléments suivants :
+
+| Élément | Version minimale | Vérification |
+|---------|------------------|--------------|
+| **Python** | 3.8 ou supérieur | `python --version` |
+| **pipx** | Dernière version | `pipx --version` |
+
+!!! note "Installations Python et `pipx` :"
+    - Pour installer Python, consultez la [documentation officielle de Python](https://www.python.org/downloads/).
+    - Si `pipx` n'est pas installé, consultez la [documentation officielle](https://pipx.pypa.io/stable/installation/).
+
+---
+
 ## Installation
 
 ### Avec pipx
@@ -27,7 +42,7 @@ Pour une configuration complète (Bash/Zsh/détails), voir [Dockerisation](docke
 
 **Créer une note**
 
-`note add "Ma première note"`
+`note add [contenu] [catégorie]`
 
 **Voir vos notes**
 

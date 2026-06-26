@@ -16,6 +16,7 @@ Le fichier **`.github/workflows/ci.yml`** définit le pipeline de tests automati
 ### Déclenchement
 
 Les tests se lancent automatiquement :
+
 - À chaque **push** sur `main`
 - À chaque **pull request**
 
